@@ -1,0 +1,23 @@
+.square {
+    width: 40px;
+    height: 40px;
+    background-color: #bdbdbd;
+    border: 1px solid #7b7b7b;
+    color: #7b7b7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.square.opened {
+    background-color: #e0e0e0;
+}
+
+.square.flagged {
+    background-color: #fdd835;
+}
+
+.square.question {
+    background-color: #81d4fa;
+}
