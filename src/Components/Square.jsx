@@ -1,7 +1,7 @@
 import React from "react";
 import './Square.css';
 
-const Square = ({ onLeftClick, onRightClick, state }) => {
+const Square = ({ data, onLeftClick, onRightClick }) => {
   const handleClick = () => {
     onLeftClick();
   };
@@ -11,13 +11,26 @@ const Square = ({ onLeftClick, onRightClick, state }) => {
     onRightClick();
   };
 
+  let display = "";
+  if (data.isRevealed) {
+    if (data.isMine) {
+      display = "💣";
+    } else if (data.adjacentMines > 0) {
+      display = data.adjacentMines;
+    }
+  } else if (data.isFlagged) {
+    display = "🚩";
+  } else if (data.isQuestion) {
+    display = "❓";
+  }
+
   return (
     <div
-      className={`square ${state}`}
+      className={`square ${data.isRevealed ? "revealed" : ""}`}
       onClick={handleClick}
       onContextMenu={handleRightClick}
     >
-      {state === "flagged" ? "🚩" : state === "question" ? "❓" : ""}
+      {display}
     </div>
   );
 };

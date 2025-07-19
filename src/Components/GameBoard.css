@@ -50,3 +50,23 @@
     background-color: purple;
     
 }
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.restart-button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #228be6;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.restart-button:hover {
+  background-color: #1864ab;
+}

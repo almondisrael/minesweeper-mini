@@ -1,17 +1,27 @@
 .square {
-    width: 40px;
-    height: 40px;
-    background-color: #bdbdbd;
-    border: 1px solid #7b7b7b;
-    color: #7b7b7b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: #3b1f1f;
+  border: 1px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  user-select: none;
 }
 
+.square.revealed {
+  background-color: rgb(214, 169, 111);
+}
+
+.square.exploded {
+  background-color: red;
+  color: white;
+}
+
+
 .square.opened {
-    background-color: #e0e0e0;
+    background-color:grey;
 }
 
 .square.flagged {
