@@ -7,7 +7,7 @@ const Square = ({ onLeftClick, onRightClick, state }) => {
   };
 
   const handleRightClick = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // prevents context menu
     onRightClick();
   };
 
@@ -16,7 +16,9 @@ const Square = ({ onLeftClick, onRightClick, state }) => {
       className={`square ${state}`}
       onClick={handleClick}
       onContextMenu={handleRightClick}
-    ></div>
+    >
+      {state === "flagged" ? "🚩" : state === "question" ? "❓" : ""}
+    </div>
   );
 };
 

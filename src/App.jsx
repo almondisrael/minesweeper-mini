@@ -5,7 +5,7 @@ import GameBoard from "./Components/GameBoard";
 function App () {
   return (
     <div className="App">
-      <h1>Minesweeper Mini</h1>
+      <h1 className="app-title">Minesweeper Mini</h1>
       <GameBoard rows = {8} cols={8} />
     </div>
   )
