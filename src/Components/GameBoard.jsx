@@ -88,33 +88,36 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     }
   };
 
-  const handleLeftClick = (index) => {
-    if (gameOver) return;
+ const handleLeftClick = (index) => {
+  if (gameOver) return;
 
-    setBoardState((prev) => {
-      const newBoard = [...prev];
-      const cell = { ...newBoard[index] };
+  setBoardState((prev) => {
+    const newBoard = [...prev];
 
-      if (cell.isRevealed || cell.isFlagged) return newBoard;
+    const cell = newBoard[index];
+    if (cell.isRevealed || cell.isFlagged) return newBoard;
 
-      if (cell.isMine) {
-        cell.exploded = true;
-        setGameOver(true);
-        alert("💥 Game Over!");
-        newBoard.forEach((c) => {
-          if (c.isMine) c.isRevealed = true;
-        });
-      } else {
-        floodReveal(newBoard, index);
-        checkWinCondition(newBoard);
-      }
+    if (cell.isMine) {
+      cell.exploded = true;
+      cell.isRevealed = true;
+      setGameOver(true);
+      alert("💥 Game Over!");
+      newBoard.forEach((c) => {
+        if (c.isMine) c.isRevealed = true;
+      });
+    } else {
+      floodReveal(newBoard, index);
+      checkWinCondition(newBoard);
+    }
 
-      newBoard[index] = cell;
-      return newBoard;
-    });
-  };
+    return [...newBoard]; // re-trigger state update
+  });
+};
+
 
   const handleRightClick = (index) => {
+
+      console.log("Right-click on:", index);
     if (gameOver) return;
 
     setBoardState((prev) => {
