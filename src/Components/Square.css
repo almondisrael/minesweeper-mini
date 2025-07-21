@@ -1,33 +1,36 @@
 .square {
   width: 40px;
   height: 40px;
-  background-color: #3b1f1f;
+  background-color: #2e4a4a; /* Default: Unrevealed */
   border: 1px solid #999;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   user-select: none;
-}
-
-.square.revealed {
-  background-color: rgb(214, 169, 111);
-}
-
-.square.exploded {
-  background-color: red;
   color: white;
 }
 
 
-.square.opened {
-    background-color:grey;
+.square.revealed {
+  background-color: #d9ead3;
+  color: #2e4a4a;
 }
+
+
+.square.exploded {
+  background-color: #8b0000;
+  color: white;
+}
+
 
 .square.flagged {
-    background-color: #fdd835;
+  background-color: #f5e663;
+  color: #2e4a4a;
 }
 
+
 .square.question {
-    background-color: #81d4fa;
+  background-color: #a0d6b4;
+  color: #2e4a4a;
 }
