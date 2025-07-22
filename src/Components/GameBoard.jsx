@@ -164,9 +164,9 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     <div>
       <div className="status-bar">
         {gameOver ? (
-          gameWon ? "🎉 You won!" : "💥 Game over!"
+          gameWon ? "🎉 YOU WON!" : "💥 GAME OVER!"
         ) : (
-          "🙂 Good luck!"
+          "🙂 GOOD LUCK!"
         )}
         <button onClick={restartGame} className="restart-button">Restart Game</button>
       </div>
