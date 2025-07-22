@@ -27,7 +27,7 @@ const Square = ({ onLeftClick, onRightClick, data }) => {
     display = "❓";
   }
 
-  // 👇 Dynamically build class names
+  
   const classNames = ["square"];
   if (data.isRevealed) classNames.push("revealed");
   if (data.exploded) classNames.push("exploded");

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #1e3d40, #35524a, #8cb1a7); /* 🌿 Gradient */
+  background: linear-gradient(to bottom, #1e3d40, #35524a, #8cb1a7); 
   font-family: sans-serif;
   color: white;
   min-height: 100vh;
