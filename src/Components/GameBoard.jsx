@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Square from "./Square";
+import Timer from "./Timer";
 import './GameBoard.css';
 
 // 🔁 Neighbor helper
@@ -52,9 +53,14 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     return board;
   };
 
+  // 🧠 Game State
   const [boardState, setBoardState] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
+
+  // ⏱️ Timer control
+  const [isRunning, setIsRunning] = useState(false);
+  const [resetTrigger, setResetTrigger] = useState(0);
 
   const floodReveal = (board, index) => {
     const stack = [index];
@@ -84,40 +90,44 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     if (hasWon) {
       setGameOver(true);
       setGameWon(true);
+      setIsRunning(false); // Stop timer
       alert("🎉 You Win!");
     }
   };
 
- const handleLeftClick = (index) => {
-  if (gameOver) return;
+  const handleLeftClick = (index) => {
+    if (gameOver) return;
 
-  setBoardState((prev) => {
-    const newBoard = [...prev];
-
-    const cell = newBoard[index];
-    if (cell.isRevealed || cell.isFlagged) return newBoard;
-
-    if (cell.isMine) {
-      cell.exploded = true;
-      cell.isRevealed = true;
-      setGameOver(true);
-      alert("💥 Game Over!");
-      newBoard.forEach((c) => {
-        if (c.isMine) c.isRevealed = true;
-      });
-    } else {
-      floodReveal(newBoard, index);
-      checkWinCondition(newBoard);
+    // ⏱ Start timer on first click
+    if (!isRunning) {
+      setIsRunning(true);
     }
 
-    return [...newBoard]; // re-trigger state update
-  });
-};
+    setBoardState((prev) => {
+      const newBoard = [...prev];
+      const cell = newBoard[index];
 
+      if (cell.isRevealed || cell.isFlagged) return newBoard;
+
+      if (cell.isMine) {
+        cell.exploded = true;
+        cell.isRevealed = true;
+        setGameOver(true);
+        setIsRunning(false); // Stop timer
+        alert("💥 Game Over!");
+        newBoard.forEach((c) => {
+          if (c.isMine) c.isRevealed = true;
+        });
+      } else {
+        floodReveal(newBoard, index);
+        checkWinCondition(newBoard);
+      }
+
+      return [...newBoard];
+    });
+  };
 
   const handleRightClick = (index) => {
-
-      console.log("Right-click on:", index);
     if (gameOver) return;
 
     setBoardState((prev) => {
@@ -144,6 +154,8 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     setBoardState(generateBoard());
     setGameOver(false);
     setGameWon(false);
+    setResetTrigger((prev) => prev + 1); // Reset timer
+    setIsRunning(false); // Wait for first click to start
   };
 
   const renderBoard = () => {
@@ -163,6 +175,11 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
   return (
     <div>
       <div className="status-bar">
+        <Timer
+          isRunning={isRunning}
+          isGameOver={gameOver}
+          resetTrigger={resetTrigger}
+        />
         {gameOver ? (
           gameWon ? "🎉 You won!" : "💥 Game over!"
         ) : (
