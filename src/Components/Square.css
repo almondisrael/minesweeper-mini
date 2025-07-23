@@ -1,0 +1,33 @@
+.square {
+  width: 40px;
+  height: 40px;
+  background-color: #3b1f1f;
+  border: 1px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  user-select: none;
+}
+
+.square.revealed {
+  background-color: rgb(214, 169, 111);
+}
+
+.square.exploded {
+  background-color: red;
+  color: white;
+}
+
+
+.square.opened {
+    background-color:grey;
+}
+
+.square.flagged {
+    background-color: #fdd835;
+}
+
+.square.question {
+    background-color: #81d4fa;
+}
