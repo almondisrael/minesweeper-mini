@@ -6,33 +6,37 @@ const Square = ({ onLeftClick, onRightClick, data }) => {
     onLeftClick();
   };
 
- const handleRightClick = (e) => {
-  e.preventDefault();
-  onRightClick(e); 
-};
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    onRightClick(e);
+  };
 
+  let display = "";
 
-  // Determine what to show based on the data
-let display = "";
-
-if (data.isRevealed) {
-  if (data.isMine) {
-    display = "💣";
-  } else if (data.adjacentMines > 0) {
-    display = data.adjacentMines;
-  } else {
-    display = ""; // empty revealed square (0 adjacent mines)
+  if (data.isRevealed) {
+    if (data.isMine) {
+      display = "💣";
+    } else if (data.adjacentMines > 0) {
+      display = data.adjacentMines;
+    } else {
+      display = "";
+    }
+  } else if (data.isFlagged) {
+    display = "🚩";
+  } else if (data.isQuestion) {
+    display = "❓";
   }
-} else if (data.isFlagged) {
-  display = "🚩";
-} else if (data.isQuestion) {
-  display = "❓";
-}
 
+  
+  const classNames = ["square"];
+  if (data.isRevealed) classNames.push("revealed");
+  if (data.exploded) classNames.push("exploded");
+  if (data.isFlagged) classNames.push("flagged");
+  if (data.isQuestion) classNames.push("question");
 
   return (
     <div
-      className={`square ${data.isRevealed ? "revealed" : ""}`}
+      className={classNames.join(" ")}
       onClick={handleClick}
       onContextMenu={handleRightClick}
     >

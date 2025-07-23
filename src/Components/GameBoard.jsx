@@ -3,7 +3,7 @@ import Square from "./Square";
 import Timer from "./Timer";
 import './GameBoard.css';
 
-// 🔁 Neighbor helper
+
 const getNeighbors = (index, rows, cols) => {
   const neighbors = [];
   const row = Math.floor(index / cols);
@@ -53,12 +53,12 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     return board;
   };
 
-  // 🧠 Game State
+ 
   const [boardState, setBoardState] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
 
-  // ⏱️ Timer control
+  
   const [isRunning, setIsRunning] = useState(false);
   const [resetTrigger, setResetTrigger] = useState(0);
 
@@ -90,7 +90,7 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     if (hasWon) {
       setGameOver(true);
       setGameWon(true);
-      setIsRunning(false); // Stop timer
+      setIsRunning(false); 
       alert("🎉 You Win!");
     }
   };
@@ -98,7 +98,7 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
   const handleLeftClick = (index) => {
     if (gameOver) return;
 
-    // ⏱ Start timer on first click
+  
     if (!isRunning) {
       setIsRunning(true);
     }
@@ -113,7 +113,7 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
         cell.exploded = true;
         cell.isRevealed = true;
         setGameOver(true);
-        setIsRunning(false); // Stop timer
+        setIsRunning(false); 
         alert("💥 Game Over!");
         newBoard.forEach((c) => {
           if (c.isMine) c.isRevealed = true;
@@ -154,8 +154,8 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     setBoardState(generateBoard());
     setGameOver(false);
     setGameWon(false);
-    setResetTrigger((prev) => prev + 1); // Reset timer
-    setIsRunning(false); // Wait for first click to start
+    setResetTrigger((prev) => prev + 1); 
+    setIsRunning(false); 
   };
 
   const renderBoard = () => {
@@ -181,9 +181,9 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
           resetTrigger={resetTrigger}
         />
         {gameOver ? (
-          gameWon ? "🎉 You won!" : "💥 Game over!"
+          gameWon ? "🎉 YOU WON!" : "💥 GAME OVER!"
         ) : (
-          "🙂 Good luck!"
+          "🙂 GOOD LUCK!"
         )}
         <button onClick={restartGame} className="restart-button">Restart Game</button>
       </div>
