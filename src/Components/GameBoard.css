@@ -2,21 +2,21 @@
     display: grid;
     grid-template-columns: repeat(8, 40px);
     grid-template-rows: repeat(8,40px);
-    gap: 2px;
+    gap: 1px;
     margin: 20px auto;
     margin-left: 350px;
 }
 
 .app-title{
     margin-left: 300px;
-    color: yellow;
-
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .square {
     width: 40px;
     height: 40px;
-    background-color: grey;
+    background-color: #2e4a4a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,6 @@
     font-weight: bold;
     user-select: none;
     cursor: pointer;
-    background-color: grey;
     transition: background-color 0.2s ease;
 
 } 
@@ -38,12 +37,12 @@
 }
 
 .square.flagged {
-    background-color: green;
-    color: white;
+    background-color: gold;
 }
 
 .square.question {
-    background-color: red;
+    background-color: beige;
+    color: red;
 }
 
 .square.default.hover {
@@ -59,14 +58,18 @@
 }
 
 .restart-button {
-  padding: 5px 10px;
+  padding: 5px 12px;
   border: none;
-  background-color: #228be6;
+  background: linear-gradient(45deg, #4caf50, #81c784);
   color: white;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .restart-button:hover {
-  background-color: #1864ab;
+  background: linear-gradient(45deg, #388e3c, #66bb6a); 
+  transform: scale(1.05);
 }
