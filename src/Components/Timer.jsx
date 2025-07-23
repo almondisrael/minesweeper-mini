@@ -16,7 +16,7 @@ export default function Timer({ isRunning, isGameOver, resetTrigger }) {
   }, [isRunning, isGameOver]);
 
   useEffect(() => {
-    // Reset the timer when resetTrigger changes (e.g., a new game)
+  
     setSeconds(0);
   }, [resetTrigger]);
 
@@ -28,17 +28,8 @@ export default function Timer({ isRunning, isGameOver, resetTrigger }) {
 
   return (
     <div>
-      <div className="text-xl font-mono">
+      <div className="timer">
         {formatTime(seconds)}
-      </div>
-      <div className="mt-4 p-2 bg-gray-100 rounded text-sm text-gray-700">
-        <strong>How to Play Minesweeper:</strong>
-        <ul className="list-disc ml-5 mt-1">
-          <li>Click a cell to reveal it.</li>
-          <li>Numbers show how many mines are in adjacent cells.</li>
-          <li>Right-click to flag a cell as a mine.</li>
-          <li>Clear all non-mine cells to win. Hitting a mine ends the game.</li>
-        </ul>
       </div>
     </div>
   );
