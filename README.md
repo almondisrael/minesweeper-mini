@@ -5,9 +5,9 @@ A web-based **Minesweeper** game created as a group project using **React**. Thi
 ## 👥 Team Members
 
 - Jaylan Saad – Frontend Developer (Game grid UI, interaction logic)
-- [Naomi Nyagetiria] – Game Logic Developer
-- [Marshal Mburu] – Tester / QA
-- [Almond Israel] – Project Manager
+- Naomi Nyagetiria – Game Logic Developer
+- Marshal Mburu – Tester / QA
+- Almond Israel – Project Manager
 
 > *This project was developed as part of a collaborative assignment for the Minesweeper Mini game.*
 
