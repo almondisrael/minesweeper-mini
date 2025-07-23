@@ -26,7 +26,7 @@ A web-based **Minesweeper** game created as a group project using **React**. Thi
 
 ## 🖥️ Live Demo
 
-REMEMBER TO INSERT DEPLOYED LINK !!!
+Link: https://minesweeper-mini.vercel.app/
 
 ---
 
