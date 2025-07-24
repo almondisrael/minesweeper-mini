@@ -12,12 +12,11 @@ export default function Timer({ isRunning, isGameOver, resetTrigger }) {
       }, 1000);
     }
 
-    return () => clearInterval(timer);
+    return () => clearInterval(timer); 
   }, [isRunning, isGameOver]);
 
   useEffect(() => {
-  
-    setSeconds(0);
+    setSeconds(0); 
   }, [resetTrigger]);
 
   const formatTime = (sec) => {
@@ -27,10 +26,8 @@ export default function Timer({ isRunning, isGameOver, resetTrigger }) {
   };
 
   return (
-    <div>
-      <div className="timer">
-        {formatTime(seconds)}
-      </div>
+    <div className="timer">
+      ⏱ {formatTime(seconds)}
     </div>
   );
 }

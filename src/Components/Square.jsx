@@ -1,14 +1,14 @@
 import React from "react";
-import './Square.css';
+import "./Square.css";
 
 const Square = ({ onLeftClick, onRightClick, data }) => {
   const handleClick = () => {
-    onLeftClick();
+    if (typeof onLeftClick === "function") onLeftClick();
   };
 
   const handleRightClick = (e) => {
     e.preventDefault();
-    onRightClick(e);
+    if (typeof onRightClick === "function") onRightClick(e);
   };
 
   let display = "";
@@ -18,8 +18,6 @@ const Square = ({ onLeftClick, onRightClick, data }) => {
       display = "💣";
     } else if (data.adjacentMines > 0) {
       display = data.adjacentMines;
-    } else {
-      display = "";
     }
   } else if (data.isFlagged) {
     display = "🚩";
@@ -29,7 +27,7 @@ const Square = ({ onLeftClick, onRightClick, data }) => {
 
   
   const classNames = ["square"];
-  if (data.isRevealed) classNames.push("revealed");
+  if (data.isRevealed) classNames.push("opened");
   if (data.exploded) classNames.push("exploded");
   if (data.isFlagged) classNames.push("flagged");
   if (data.isQuestion) classNames.push("question");

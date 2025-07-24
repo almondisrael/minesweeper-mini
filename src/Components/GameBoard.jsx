@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Square from "./Square";
 import Timer from "./Timer";
-import './GameBoard.css';
+import "./GameBoard.css";
 
 const getNeighbors = (index, rows, cols) => {
   const neighbors = [];
@@ -23,6 +23,10 @@ const getNeighbors = (index, rows, cols) => {
 
 const GameBoard = ({ rows = 8, cols = 8 }) => {
   const [hasStarted, setHasStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [resetTrigger, setResetTrigger] = useState(0);
 
   const generateBoard = () => {
     const totalSquares = rows * cols;
@@ -55,10 +59,6 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
   };
 
   const [boardState, setBoardState] = useState(generateBoard());
-  const [gameOver, setGameOver] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
-  const [isRunning, setIsRunning] = useState(false);
-  const [resetTrigger, setResetTrigger] = useState(0);
 
   const floodReveal = (board, index) => {
     const stack = [index];
@@ -82,13 +82,11 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
   };
 
   const checkWinCondition = (board) => {
-    const hasWon = board.every((cell) =>
-      cell.isMine || cell.isRevealed
-    );
+    const hasWon = board.every((cell) => cell.isMine || cell.isRevealed);
     if (hasWon) {
       setGameOver(true);
       setGameWon(true);
-      setIsRunning(false); 
+      setIsRunning(false);
       alert("🎉 You Win!");
     }
   };
@@ -110,7 +108,7 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
         cell.exploded = true;
         cell.isRevealed = true;
         setGameOver(true);
-        setIsRunning(false); 
+        setIsRunning(false);
         alert("💥 Game Over!");
         newBoard.forEach((c) => {
           if (c.isMine) c.isRevealed = true;
@@ -151,8 +149,12 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     setBoardState(generateBoard());
     setGameOver(false);
     setGameWon(false);
-    setResetTrigger((prev) => prev + 1); 
-    setIsRunning(false); 
+    setIsRunning(false);
+    setResetTrigger((prev) => prev + 1);
+
+    if (!hasStarted) {
+      setHasStarted(true);
+    }
   };
 
   const renderBoard = () => {
@@ -169,52 +171,51 @@ const GameBoard = ({ rows = 8, cols = 8 }) => {
     ));
   };
 
-  if (!hasStarted) {
-    return (
-      <div className="instructions-screen">
-        <h2>🧠 How to Play</h2>
-        <ul className="remove-bullets">
-         <li><b>Click</b> a cell to reveal it</li>
-         <li><b>Numbers</b> show how many mines are in adjacent cells</li>
-         <li><b>Right-click</b> to flag a cell you suspect has a mine</li>
-         <li><b>Revealing a blank cell</b> auto-clears surrounding safe cells</li>
-         <li><b>Clear all non-mine</b> cells to win — hitting a mine ends the game</li>
-        </ul>
-        <button onClick={() => setHasStarted(true)} className="start-button">
-          Start Game
-        </button>
-      </div>
-    );
-  }
-
+if (!hasStarted) {
   return (
-  <div>
-    <div className="status-bar">
-      <Timer
-        isRunning={isRunning}
-        isGameOver={gameOver}
-        resetTrigger={resetTrigger}
-      />
-      {gameOver ? (
-        gameWon ? (
-          <span className="status-text">🎉 YOU WON!</span>
-        ) : (
-          <span className="status-text">💥 GAME OVER!</span>
-        )
-      ) : (
-        <span className="good-luck">🙂 GOOD LUCK!</span>
-      )}
-      <button onClick={restartGame} className="restart-button">
-        Restart Game
+    <div className="instructions-screen">
+      <h2>🧠 How to Play</h2>
+      <ul className="remove-bullets">
+        <li><b>Click</b> a cell to reveal it</li>
+        <li><b>Numbers</b> show how many mines are in adjacent cells</li>
+        <li><b>Right-click</b> to flag a cell you suspect has a mine</li>
+        <li><b>Revealing a blank cell</b> auto-clears surrounding safe cells</li>
+        <li><b>Clear all non-mine</b> cells to win — hitting a mine ends the game</li>
+      </ul>
+      <button onClick={() => setHasStarted(true)} className="start-button">
+        Start Game
       </button>
     </div>
-    <div className="game-board">{renderBoard()}</div>
-  </div>
-);
+  );
+}
 
+
+
+  return (
+    <div className="app-container">
+         
+      <div className="status-bar">
+        <Timer
+          isRunning={isRunning}
+          isGameOver={gameOver}
+          resetTrigger={resetTrigger}
+        />
+        {gameOver ? (
+          gameWon ? (
+            <span className="status-text">🎉 YOU WON!</span>
+          ) : (
+            <span className="status-text">💥 GAME OVER!</span>
+          )
+        ) : (
+          <span className="good-luck">🙂 GOOD LUCK!</span>
+        )}
+        <button onClick={restartGame} className="restart-button">
+          Restart Game
+        </button>
+      </div>
+      <div className="game-board">{renderBoard()}</div>
+    </div>
+  );
 };
 
 export default GameBoard;
-
-
-
